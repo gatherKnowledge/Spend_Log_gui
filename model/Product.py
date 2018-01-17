@@ -15,9 +15,19 @@ class Product():
 		print('my string ')
 
 	def make_str(self):
+		# tmp = self.time.strftime('%y년 %m월 %일 %A\n%h%m')
+		print
+		# datetime.datetime.strptime("2017-01-02 14:44", "%Y-%m-%d %H:%M")
+		tmp = self.time
+		to_date = datetime.datetime.strptime(tmp, "%Y%m%d%H%M")
+
+		# 18/01/17/0000
+		print(tmp)
+		# TODO dt.weekday()   {0:월, 1:화, 2:수, 3:목, 4:금, 5:토, 6:일}
+
 		strn = '\n'
-		strn += self.time
-		strn += '\n\''+self.name + '\'을/를 '+ format(int(self.price), ",") +'에 ' + format(int(self.yang), ",") + '개 ' + self.yongdo + '했습니다.'
+		strn += tmp[0:2]+'년 '+tmp[2:4]+'월 '+tmp[4:6]+'일 '+to_date.strftime("%A")[0:3]+' \n'+tmp[6:8]+'시'+tmp[8:10]+'분\n=>'
+		strn += '\''+self.name + '\'을/를 '+ format(int(self.price), ",") +'에 ' + format(int(self.yang), ",") + '개 ' + self.yongdo + '했습니다.'
 		strn += '\n비고 : '+ self.dec
 		strn += '\n총 '+ self.yongdo +' 금액' + format(int(self.total_price), ",") + '원'
 		return strn
