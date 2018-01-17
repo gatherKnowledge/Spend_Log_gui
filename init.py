@@ -70,7 +70,7 @@ class UiMain(QMainWindow, form):
 	def detail_view_event(self):
 		view = self.listProduct
 		# self.labelDetail.setText()
-		tmp = global_list_product[view.currentRow()].make_str() 
+		tmp = global_list_product[view.currentRow()].make_str()
 		self.labelDetail.setText(tmp)
 
 	# test method value check
