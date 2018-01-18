@@ -1,6 +1,6 @@
 import sys
 import datetime
-import util
+import utils.Util as util
 
 from PyQt5 import uic
 from PyQt5.QtWidgets import *
