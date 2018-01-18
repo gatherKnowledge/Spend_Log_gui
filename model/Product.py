@@ -2,7 +2,7 @@ import datetime
 import json
 
 class Product():
-	def __init__(self, name, yongdo, yang, dec, price, time):
+	def __init__(self, time, name, yongdo, yang, dec, price):
 		self.name = name
 		self.yongdo = yongdo
 		self.yang = yang
@@ -32,9 +32,16 @@ class Product():
 		strn += '\n총 '+ self.yongdo +' 금액' + format(int(self.total_price), ",") + '원'
 		return strn
 
+
 	def print_obj(self):
 		strn = self.make_str()
 		print(strn)
+
+	#
+	def stringize(self):
+		temp = self.time + ',' + self.name + ',' + self.yongdo + ',' + str(self.yang) + ',' + self.dec + ',' + str(self.price) + '\n'
+		print(temp)
+		return temp
 
 	# json style object data
 	def getInstanceJson(self):

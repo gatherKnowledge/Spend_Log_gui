@@ -16,8 +16,6 @@ form = uic.loadUiType("./ui/spend_log.ui")[0]
  
 * 추가 기능 
  1. 파일 만들어서 관리
-    * Json타입으로 개발
-    * 
  2. 
  
 """
@@ -38,6 +36,8 @@ class UiMain(QMainWindow, form):
 		# 라벨 값 테스트
 		self.btnDelete.clicked.connect(self.delete_list_event)
 
+		# 파일 생성 버튼
+		self.btnMakeFile.clicked.connect(self.save_list)
 
 		# 종료버튼
 		self.btnClose.clicked.connect(self.close_event)
@@ -121,6 +121,17 @@ class UiMain(QMainWindow, form):
 			qApp.exit()
 		else:
 			pass
+
+	#
+	def save_list(self):
+		date = datetime.datetime.now()
+		reply = QMessageBox.question(self, "알림"
+		                             , "파일을 만드시겠습니까?", QMessageBox.Yes | QMessageBox.No)
+		if reply == QMessageBox.No:
+			return
+
+		if len(global_list_product) is not 0 :
+			util.save_file(date.strftime('%y%m%d'), global_list_product)
 
 
 if __name__ == '__main__':
