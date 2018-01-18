@@ -1,6 +1,6 @@
 import matplotlib.pyplot as plt
-import models.Product as prdt
-
+import model.Product as prdt
+from utils import Util
 
 class Graph:
 	def __init__(self):
@@ -54,3 +54,6 @@ plt.annotate("여기가 0.5!",
              textcoords='offset points', 
              fontsize=16, arrowprops=dict(arrowstyle="->"))
 """
+if __name__=='__main__':
+	f = Util.read_file('180118')
+	print(f)

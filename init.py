@@ -129,7 +129,6 @@ class UiMain(QMainWindow, form):
 		                             , "파일을 만드시겠습니까?", QMessageBox.Yes | QMessageBox.No)
 		if reply == QMessageBox.No:
 			return
-
 		if len(global_list_product) is not 0 :
 			util.save_file(date.strftime('%y%m%d'), global_list_product)
 
