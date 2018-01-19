@@ -1,5 +1,4 @@
 import matplotlib.pyplot as plt
-import model.Product as prdt
 from utils import Util
 
 class Graph:

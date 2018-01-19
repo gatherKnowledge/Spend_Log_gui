@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>548</width>
-    <height>509</height>
+    <width>798</width>
+    <height>588</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,14 +16,14 @@
   <widget class="QTabWidget" name="tabWidget">
    <property name="geometry">
     <rect>
-     <x>40</x>
-     <y>40</y>
-     <width>471</width>
-     <height>401</height>
+     <x>10</x>
+     <y>10</y>
+     <width>781</width>
+     <height>571</height>
     </rect>
    </property>
    <property name="currentIndex">
-    <number>1</number>
+    <number>0</number>
    </property>
    <widget class="QWidget" name="tab">
     <attribute name="title">
@@ -33,9 +33,9 @@
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>230</y>
-       <width>231</width>
-       <height>131</height>
+       <y>390</y>
+       <width>531</width>
+       <height>141</height>
       </rect>
      </property>
      <property name="title">
@@ -68,10 +68,10 @@
     <widget class="QGroupBox" name="groupBox">
      <property name="geometry">
       <rect>
-       <x>250</x>
-       <y>60</y>
-       <width>201</width>
-       <height>201</height>
+       <x>550</x>
+       <y>50</y>
+       <width>211</width>
+       <height>481</height>
       </rect>
      </property>
      <property name="title">
@@ -84,7 +84,7 @@
       <property name="geometry">
        <rect>
         <x>20</x>
-        <y>30</y>
+        <y>10</y>
         <width>161</width>
         <height>131</height>
        </rect>
@@ -103,8 +103,8 @@
     <widget class="QWidget" name="horizontalLayoutWidget_5">
      <property name="geometry">
       <rect>
-       <x>250</x>
-       <y>30</y>
+       <x>550</x>
+       <y>20</y>
        <width>201</width>
        <height>25</height>
       </rect>
@@ -138,8 +138,8 @@
       <rect>
        <x>10</x>
        <y>10</y>
-       <width>231</width>
-       <height>211</height>
+       <width>531</width>
+       <height>371</height>
       </rect>
      </property>
      <property name="title">
@@ -150,17 +150,38 @@
        <rect>
         <x>10</x>
         <y>20</y>
-        <width>211</width>
-        <height>188</height>
+        <width>472</width>
+        <height>341</height>
        </rect>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout">
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout_3">
          <item>
+          <widget class="QLabel" name="label_6">
+           <property name="text">
+            <string>시간</string>
+           </property>
+          </widget>
+         </item>
+         <item>
           <widget class="QTimeEdit" name="editTime">
            <property name="enabled">
             <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="btnTimePlus">
+           <property name="text">
+            <string>+5</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="pushButton_2">
+           <property name="text">
+            <string>-5</string>
            </property>
           </widget>
          </item>
@@ -170,6 +191,19 @@
             <string>기본값(현재시간)</string>
            </property>
           </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer_2">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
          </item>
         </layout>
        </item>
@@ -217,6 +251,19 @@
            </item>
           </widget>
          </item>
+         <item>
+          <spacer name="horizontalSpacer">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
         </layout>
        </item>
        <item>
@@ -232,7 +279,38 @@
           <widget class="QLineEdit" name="lineCost"/>
          </item>
          <item>
-          <widget class="QLabel" name="label_3">
+          <widget class="QPushButton" name="pushButton_5">
+           <property name="text">
+            <string>+5</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="pushButton_6">
+           <property name="text">
+            <string>-5</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer_3">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_7">
+         <item>
+          <widget class="QLabel" name="label_8">
            <property name="text">
             <string>수량</string>
            </property>
@@ -241,7 +319,47 @@
          <item>
           <widget class="QLineEdit" name="lineAmount"/>
          </item>
+         <item>
+          <widget class="QPushButton" name="pushButton_9">
+           <property name="text">
+            <string>+5</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="pushButton_10">
+           <property name="text">
+            <string>-5</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer_4">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
         </layout>
+       </item>
+       <item>
+        <spacer name="verticalSpacer">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
        </item>
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout_5">
@@ -284,7 +402,7 @@
      <property name="title">
       <string>목록</string>
      </property>
-     <widget class="QListWidget" name="listProduct_2">
+     <widget class="QListWidget" name="listFile">
       <property name="geometry">
        <rect>
         <x>10</x>
@@ -294,7 +412,7 @@
        </rect>
       </property>
      </widget>
-     <widget class="QPushButton" name="btnDelete_2">
+     <widget class="QPushButton" name="btnDfile">
       <property name="geometry">
        <rect>
         <x>170</x>
@@ -307,7 +425,7 @@
        <string>파일삭제</string>
       </property>
      </widget>
-     <widget class="QPushButton" name="btnDelete_3">
+     <widget class="QPushButton" name="btnOutput">
       <property name="geometry">
        <rect>
         <x>170</x>
