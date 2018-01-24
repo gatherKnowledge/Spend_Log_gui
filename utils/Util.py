@@ -49,6 +49,19 @@ def delete_file(fileName):
 	fdir = const.PATH + fileName
 	os.remove(fdir)
 
+
+def calulate_plus(value):
+	value = value + 5
+	value = value % 60
+	return value
+
+def calulate_minus(value):
+	value = value - 5
+	if value < 0 :
+		value = value + 60
+	return value
+
+
 """
 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 Graph 그리기 관련 Util

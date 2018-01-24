@@ -5,11 +5,14 @@ from utils import Constant as const
 
 from PyQt5 import uic
 from PyQt5.QtWidgets import *
+from PyQt5.QtCore import QTime
 from model.Product import Product
+
 
 
 global_list_product = list()
 global_list_chart = list()
+
 form = uic.loadUiType("./ui/spend_log.ui")[0]
 
 """
@@ -17,10 +20,11 @@ form = uic.loadUiType("./ui/spend_log.ui")[0]
  함수 명명할 때, 유저 동작과 관계돼 있는 이벤트들은 접미사에 '~_event'
  
 * 추가 기능 
- 1. 파일 만들어서 관리
+ [v] 1. 파일 만들어서 관리
  2. 파일 로드
  3. 차트화 
- 
+ 4. 세팅파일 생성
+ [v] 5. 매수,매도 목록에 시간 표기
 """
 
 
@@ -32,8 +36,17 @@ class UiMain(QMainWindow, form):
 		self.setupUi(self)
 		# Events 등록
 		self.load_events()
+		# Value 추가
+		self.load_data()
+
+	def load_data(self):
+		self.lineAmount.setText('0')
+		self.lineCost.setText('0')
 
 	def load_events(self):
+		"""
+		메인 이벤트 기능
+		"""
 		# 기본값 고정 버튼
 		self.checkDefault.clicked.connect(self.enable_time_event)
 		# list 클릭 시 이벤트
@@ -50,15 +63,25 @@ class UiMain(QMainWindow, form):
 		self.tabWidget.tabBarClicked.connect(self.load_log)
 		# 챠트 보기
 		self.btnOutput.clicked.connect(self.load_chart)
+		# 파일 삭제
 		self.btnDfile.clicked.connect(self.delete_file_event)
+
 		"""
-		+5/-5 button event 
+		+5/-5 button time event 
 		"""
-		self.btnTimePlus.clicked.connect(self.plus)
+		self.btnPlusTime.clicked.connect(self.plus_time)
+		self.btnMinusTime.clicked.connect(self.minus_time)
+
+		"""
+		+5/-5 button value event 
+		"""
+		self.btnPlusCost.clicked.connect(self.plus_cost)
+		self.btnMinusCost.clicked.connect(self.minus_cost)
+		self.btnPlusAmount.clicked.connect(self.plus_amount)
+		self.btnMinusAmount.clicked.connect(self.minus_amount)
 
 		# 종료버튼
 		self.btnClose.clicked.connect(self.close_event)
-
 
 	"""
 		TEST
@@ -78,29 +101,76 @@ class UiMain(QMainWindow, form):
 
 		# checked : 2 / not checked : 0
 		# self.value_event_impl(str(self.checkDefault.checkState()))
-	def plus(self):
-		timer = self.editTime
-		present = timer.text()
-		present =  present[3:]
-		present = present.split(':')
-		hour = present[0]
-		min = int(present[1])
-		min = min+5
-		min = min%60
-		timer.setTime(QTimeEdit(hour,str(min)))
+	def plus_time(self):
+		present = self.editTime.time()
+		hour = present.hour()
+		minute = present.minute()
+		minute = util.calulate_plus(minute)
+		after_time = QTime(hour, minute)
+		self.editTime.setTime(after_time)
 
+	def plus_cost(self):
+		value = self.lineCost.text()
+		value = int(value) + 5
+		self.lineCost.setText(str(value))
+
+	def plus_amount(self):
+		value = self.lineAmount.text()
+		value = int(value) + 5
+		self.lineAmount.setText(str(value))
+
+	def minus_time(self):
+		present = self.editTime.time()
+		hour = present.hour()
+		minute = present.minute()
+		minute = util.calulate_minus(minute)
+		after_time = QTime(hour, minute)
+		self.editTime.setTime(after_time)
+
+	def minus_cost(self):
+		value = self.lineCost.text()
+		value = int(value) - 5
+		self.lineCost.setText(str(value))
+
+	def minus_amount(self):
+		value = self.lineAmount.text()
+		value = int(value) - 5
+		self.lineAmount.setText(str(value))
 
 	def load_chart(self):
+		print(global_list_chart)
 		x = list()
 		y = list()
+		dct = dict()
 		for prdt_str in global_list_chart :
 			splited = prdt_str.split(',')
+
 			tmp = splited[0]
-			x.append(tmp[6:])
-			y.append(splited[3])
+			x_value = tmp[6:]
+			y_value = splited[3]
+
+			try:
+				dct[x_value] = int(dct[x_value]) + int(y_value)
+			except KeyError:
+				dct[x_value] = y_value
+		
+		### 자료구조/정렬 해결문제!
+		### 깔쌈한 해결방법 없을까
+		std = None
+		for i in dct.items():
+			for j in dct.items():
+				print(j[0])
+
+
+		for k in dct.keys():
+			x.append(k)
+		for v in dct.values():
+			y.append(v)
+		print(x)
+		print(y)
 
 		util.config_chart('Time', 'Amount', 'y', 'Total')
-		util.set_line(x,y)
+		util.set_line(x, y)
 		util.show_chart()
 
 
@@ -171,16 +241,16 @@ class UiMain(QMainWindow, form):
 		preDate = date.strftime('%y%m%d')
 
 		if self.checkDefault.checkState() == 0 :
-			ptime = self.editTime.dateTime().toString('hhmm')
+			pTime = self.editTime.dateTime().toString('hhmm')
 		elif self.checkDefault.checkState() == 2 :
-			ptime  = date.strftime('%H%M')
-		ptime = preDate + ptime
+			pTime  = date.strftime('%H%M')
+		rTime = preDate + pTime
 
-		p = Product(name=pname, yongdo=pyongdo, yang=pyang,dec=pdec, price=pprice,time=ptime)
+		p = Product(name=pname, yongdo=pyongdo, yang=pyang,dec=pdec, price=pprice,time=rTime)
 		global_list_product.append(p)
 		view = self.listProduct
 		item = QListWidgetItem(view)
-		item.setText(str(p.name) + '/' + str(p.yongdo))
+		item.setText('('+str(pTime)[:2]+':' +str(pTime)[2:]+') '+str(p.name) + '/' + str(p.yongdo))
 
 	# 공통적으로 타겟에 대한 정보를 전달해 줄 수는 없을까?
 	def enable_time_event(self):

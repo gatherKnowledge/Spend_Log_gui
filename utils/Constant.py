@@ -1,3 +1,3 @@
 En_TYPE = 'UTF-8'
-PATH = './data/'
+PATH = './logs/'
 EXT = '.etf'
