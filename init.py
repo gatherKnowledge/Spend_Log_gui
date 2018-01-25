@@ -138,44 +138,89 @@ class UiMain(QMainWindow, form):
 		self.lineAmount.setText(str(value))
 
 	def load_chart(self):
-		print(global_list_chart)
-		x = list()
-		y = list()
-		dct = dict()
+		x_sell = list()
+		x_buy = list()
+		y_sell = list()
+		y_buy = list()
+		dct_buy = dict()
+		dct_sell = dict()
+
 		for prdt_str in global_list_chart :
 			splited = prdt_str.split(',')
+			if splited[2] == '매수' :
+				tmp = splited[0]
+				x_value = tmp[6:]
+				y_value = splited[3]
+				try:
+					dct_buy[x_value] = int(dct_buy[x_value]) + int(y_value)
+				except KeyError:
+					dct_buy[x_value] = int(y_value)
 
-			tmp = splited[0]
-			x_value = tmp[6:]
-			y_value = splited[3]
+			elif splited[2] == '매도' :
+				tmp = splited[0]
+				x_value = tmp[6:]
+				y_value = splited[3]
+				try:
+					dct_sell[x_value] = int(dct_sell[x_value]) + int(y_value)
+				except KeyError:
+					dct_sell[x_value] = int(y_value)
 
-			try:
-				dct[x_value] = int(dct[x_value]) + int(y_value)
-			except KeyError:
-				dct[x_value] = y_value
-		
-		### 자료구조/정렬 해결문제!
-		### 깔쌈한 해결방법 없을까
-		std = None
-		for i in dct.items():
-			for j in dct.items():
-				print(j[0])
+		for k in dct_buy.keys():
+			x_buy.append(k)
+		for v in dct_buy.values():
+			y_buy.append(v)
+
+		for k in dct_sell.keys():
+			x_sell.append(k)
+		for v in dct_sell.values():
+			y_sell.append(v)
 
 
-		for k in dct.keys():
-			x.append(k)
-		for v in dct.values():
-			y.append(v)
-		print(x)
-		print(y)
+
+		j = len(dct_buy.keys())
+		while j :
+			for i,k in enumerate(x_buy) :
+				try:
+					if x_buy[i] > x_buy[i+1] :
+						tmp = x_buy[i]
+						x_buy[i] = x_buy[i+1]
+						x_buy[i+1] = tmp
+
+						tmp = y_buy[i]
+						y_buy[i] = y_buy[i + 1]
+						y_buy[i + 1] = tmp
+				except Exception :
+					pass
+			j = j-1
+		j = len(dct_sell.keys())
+		while j:
+			for i, k in enumerate(x_sell):
+				try:
+					if x_sell[i] > x_sell[i + 1]:
+						tmp = x_sell[i]
+						x_sell[i] = x_sell[i + 1]
+						x_sell[i + 1] = tmp
+
+						tmp = y_sell[i]
+						y_sell[i] = y_sell[i + 1]
+						y_sell[i + 1] = tmp
+				except Exception:
+					pass
+			j = j - 1
+
+		print('x')
+		print(x_buy)
+		print(y_buy)
+
+		print('y')
+		print(x_sell)
+		print(y_sell)
+
 
 		util.config_chart('Time', 'Amount', 'y', 'Total')
-		util.set_line(x, y)
+		util.set_line(x_buy, y_buy, label_name='매수', color='r')
+		util.set_line(x_sell, y_sell, label_name='매도', color='b')
 		util.show_chart()
-
-
-
-
 
 		# self.value_event_impl(str(self.comboKind.currentText()))
 		# self.value_event_impl(str(self.comboBuySell.currentText()))

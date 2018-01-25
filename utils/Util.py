@@ -68,9 +68,9 @@ Graph 그리기 관련 Util
 Start
 ------------------------------------------------------------------------------------
 """
-def set_line(x, y, label_name = None):
+def set_line(x, y, label_name = None, color = 's'):
 	# plt.plot(['12:31', '12:41', '13:31', '15:31'] , [1, 2, 3, 4], label='sell')
-	plt.plot(x , y, 's--',label=label_name)
+	plt.plot(x , y, color +'-',label=label_name)
 	plt.scatter(x, y)
 
 def show_chart():

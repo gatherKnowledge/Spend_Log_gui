@@ -17,10 +17,9 @@ class Graph:
 	# def detach_data(self, param_prduct):
 	# 	param_prduct.
 
-	def set_line(self, x, y, label_name = None):
+	def set_line(self, *args, **kwargs):
 		# plt.plot(['12:31', '12:41', '13:31', '15:31'] , [1, 2, 3, 4], label='sell')
-		plt.plot(x , y, 's--',label=label_name)
-		plt.scatter(x, y)
+		plt.plot(*args, **kwargs)
 
 	def show_chart(self):
 		plt.show()
