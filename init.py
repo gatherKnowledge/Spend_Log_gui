@@ -83,10 +83,6 @@ class UiMain(QMainWindow, form):
 		# 종료버튼
 		self.btnClose.clicked.connect(self.close_event)
 
-	"""
-		TEST
-	"""
-	# test method value check
 	def delete_list_event(self):
 		view = self.listProduct
 		row = view.currentRow()
